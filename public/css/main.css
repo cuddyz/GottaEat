@@ -3,10 +3,28 @@ body {
     background-image: url("../resources/background.png");
 }
 
-.btn-container {
+.btn-container{
     display: flex;
     margin-top: 45vh;
 }
+
+.loading-container {
+    display: flex;
+    margin-top: 40vh;
+}
+
+.loader {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 125px;
+    -webkit-animation:spin 2s linear infinite;
+    -moz-animation:spin 2s linear infinite;
+    animation:spin 2s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .btn-custom {
     margin-left: auto;

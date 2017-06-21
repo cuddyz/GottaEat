@@ -10,8 +10,11 @@
 
     </head>
     <body ng-controller="mainController">
-        <div class="btn-container">
-            <button type="button" class="btn btn-custom">{{name}}</button>
+        <div ng-if="!isLoading" class="btn-container">
+            <button ng-click="getRestaurant()" type="button" class="btn btn-custom">GottaEat</button>
+        </div>
+        <div ng-if="isLoading" class="loading-container">
+            <i class="fa fa-cutlery loader" aria-hidden="true"></i>
         </div>
         <script src="/assets/js/app.js"></script>
         <script src="/assets/js/controllers/mainController.js"></script>
