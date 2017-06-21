@@ -1,3 +1,26 @@
 body {
-    font-family: "Courier New";
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn-container {
+    display: flex;
+    margin-top: 40vh;
+}
+
+.btn-custom {
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 15px;
+    font-size: 30px;
+    font-weight: 400;
+    font-style: italic;
+    color: #f2f2f2;
+    background-color: #E74C3C;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+    color: #e6e6e6;
+    background-color: #C0392B;
+    cursor: pointer;
 }
