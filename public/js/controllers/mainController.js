@@ -1,12 +1,15 @@
 gottaEat.controller('mainController', ['$scope', function($scope) {
     $scope.isLoading = false;
+    $scope.showModal = false;
     $scope.restaurants = [];
 
-    $scope.getRestaurant = function() {
+    $scope.getRestaurants = function() {
+        $scope.setLoader();
         if ($scope.restaurants.length > 0) {
-
-        } else {
+            pickRestaurant();
+            $scope.showHideModal();
             $scope.setLoader();
+        } else {
             callPlacesApi()
         }
     };
@@ -15,11 +18,20 @@ gottaEat.controller('mainController', ['$scope', function($scope) {
         $scope.isLoading = !$scope.isLoading;
     };
 
+    $scope.showHideModal = function() {
+        $scope.showModal = !$scope.showModal;
+    };
+
+    var pickRestaurant = function() {
+        var random = Math.floor((Math.random() * $scope.restaurants.length));
+        console.log($scope.restaurants[random]);
+    };
+
     var callPlacesApi = function() {
         var location = new google.maps.LatLng(38.476415, -90.299430);
         var request = {
             location: location,
-            radius: 5000,
+            radius: 1000,
             types: ['restaurant'],
             openNow: true
         };
@@ -42,7 +54,9 @@ gottaEat.controller('mainController', ['$scope', function($scope) {
                 page.nextPage();
             } else {
                 $scope.setLoader();
+                $scope.showHideModal();
                 $scope.$apply();
+                pickRestaurant();
             }
         } else {
             $scope.error = true;
