@@ -22,16 +22,17 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" ng-click="showHideModal()">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <button type="button" class="close" ng-click="showHideModal()"><i class="fa fa-times" aria-hidden="true"></i></button>
                     </div>
                     <div class="modal-body">
-                        <p>Some text in the modal.</p>
+                        <h3>{{restaurant.name}}</h3>
+                        <p>Rating: {{restaurant.rating}}</p>
+                        <p>Price: {{restaurant.price_level}}</p>
+                        <p>Address: {{restaurant.vicinity}}</p>
                     </div>
                 </div>
             </div>
         </div>
-
         <div id="map"></div>
         <script src="/assets/js/app.js"></script>
         <script src="/assets/js/controllers/mainController.js"></script>

@@ -24,7 +24,7 @@ gottaEat.controller('mainController', ['$scope', function($scope) {
 
     var pickRestaurant = function() {
         var random = Math.floor((Math.random() * $scope.restaurants.length));
-        console.log($scope.restaurants[random]);
+        $scope.restaurant = $scope.restaurants[random];
     };
 
     var callPlacesApi = function() {
@@ -55,8 +55,8 @@ gottaEat.controller('mainController', ['$scope', function($scope) {
             } else {
                 $scope.setLoader();
                 $scope.showHideModal();
-                $scope.$apply();
                 pickRestaurant();
+                $scope.$apply();
             }
         } else {
             $scope.error = true;
