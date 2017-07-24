@@ -2,9 +2,14 @@ gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function
     $scope.showModal = false;
     $scope.restaurants = [];
 
-    geolocation.getLocation().then(function(data){
+    geolocation.getLocation()
+        .catch(function(e) {
+            $scope.locationError = true;
+        })
+        .then(function(data){
         $scope.lat = data.coords.latitude;
         $scope.long = data.coords.longitude;
+        $scope.hasLocation = true;
     });
 
     $scope.getRestaurants = function() {
