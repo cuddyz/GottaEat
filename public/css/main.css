@@ -50,7 +50,6 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    margin-top: 25vh;
 }
 
 #infoModal .modal-content {
@@ -61,4 +60,9 @@ body {
 #infoModal .modal-header {
     border-bottom: none;
     padding: 5px;
+}
+
+#map {
+    height: 400px;
+    width: 100%;
 }

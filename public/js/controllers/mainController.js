@@ -1,4 +1,4 @@
-gottaEat.controller('mainController', ['$scope', function($scope) {
+gottaEat.controller('mainController', ['$scope', '$sce', function($scope, $sce) {
     $scope.isLoading = false;
     $scope.showModal = false;
     $scope.restaurants = [];
@@ -29,17 +29,16 @@ gottaEat.controller('mainController', ['$scope', function($scope) {
 
     var callPlacesApi = function() {
         var location = new google.maps.LatLng(38.476415, -90.299430);
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 38.476415, lng: -90.299430},
+        });
+
         var request = {
             location: location,
             radius: 1000,
             types: ['restaurant'],
             openNow: true
         };
-
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: location,
-            zoom: 15
-        });
 
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch(request, callback);
@@ -63,5 +62,12 @@ gottaEat.controller('mainController', ['$scope', function($scope) {
             $scope.setLoader();
             $scope.$apply();
         }
+    };
+
+    $scope.getMapURL = function() {
+        if ($scope.restaurant) {
+            return $sce.trustAsResourceUrl("https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=place_id:" + $scope.restaurant.place_id);
+        }
+        return "";
     }
 }]);
