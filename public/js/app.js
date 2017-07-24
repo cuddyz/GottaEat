@@ -1,1 +1,1 @@
-var gottaEat = angular.module("gottaEat", []);
+var gottaEat = angular.module("gottaEat", ['geolocation']);

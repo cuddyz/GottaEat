@@ -1,6 +1,11 @@
-gottaEat.controller('mainController', ['$scope', '$sce', function($scope, $sce) {
+gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function($scope, $sce, geolocation) {
     $scope.showModal = false;
     $scope.restaurants = [];
+
+    geolocation.getLocation().then(function(data){
+        $scope.lat = data.coords.latitude;
+        $scope.long = data.coords.longitude;
+    });
 
     $scope.getRestaurants = function() {
         $scope.showHideModal();
@@ -21,7 +26,7 @@ gottaEat.controller('mainController', ['$scope', '$sce', function($scope, $sce) 
     };
 
     var callPlacesApi = function() {
-        var location = new google.maps.LatLng(38.476415, -90.299430);
+        var location = new google.maps.LatLng($scope.lat, $scope.long);
 
         var request = {
             location: location,
