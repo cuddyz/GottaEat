@@ -13,8 +13,11 @@
     </head>
     <body ng-controller="mainController">
         <div ng-if="!hasLocation">
-            <div class="page-loading-container">
+            <div ng-if=!locationError class="page-loading-container">
                 <i class="fa fa-cutlery loader" aria-hidden="true"></i>
+            </div>
+            <div ng-if=locationError class="page-loading-container">
+                <h1>Error getting location.</h1>
             </div>
         </div>
         <div ng-if="hasLocation">
