@@ -1,21 +1,14 @@
 gottaEat.controller('mainController', ['$scope', '$sce', function($scope, $sce) {
-    $scope.isLoading = false;
     $scope.showModal = false;
     $scope.restaurants = [];
 
     $scope.getRestaurants = function() {
-        $scope.setLoader();
+        $scope.showHideModal();
         if ($scope.restaurants.length > 0) {
             pickRestaurant();
-            $scope.showHideModal();
-            $scope.setLoader();
         } else {
             callPlacesApi()
         }
-    };
-
-    $scope.setLoader = function() {
-        $scope.isLoading = !$scope.isLoading;
     };
 
     $scope.showHideModal = function() {
@@ -29,9 +22,6 @@ gottaEat.controller('mainController', ['$scope', '$sce', function($scope, $sce) 
 
     var callPlacesApi = function() {
         var location = new google.maps.LatLng(38.476415, -90.299430);
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 38.476415, lng: -90.299430},
-        });
 
         var request = {
             location: location,
@@ -40,7 +30,7 @@ gottaEat.controller('mainController', ['$scope', '$sce', function($scope, $sce) 
             openNow: true
         };
 
-        var service = new google.maps.places.PlacesService(map);
+        var service = new google.maps.places.PlacesService(document.createElement('div'));
         service.nearbySearch(request, callback);
     };
 
@@ -52,14 +42,12 @@ gottaEat.controller('mainController', ['$scope', '$sce', function($scope, $sce) 
             if (page.hasNextPage) {
                 page.nextPage();
             } else {
-                $scope.setLoader();
-                $scope.showHideModal();
                 pickRestaurant();
                 $scope.$apply();
             }
         } else {
             $scope.error = true;
-            $scope.setLoader();
+            $scope.showHideModal();
             $scope.$apply();
         }
     };

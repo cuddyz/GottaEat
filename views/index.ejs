@@ -11,25 +11,26 @@
 
     </head>
     <body ng-controller="mainController">
-        <div ng-if="!isLoading" class="btn-container">
+        <div class="btn-container">
             <button ng-click="getRestaurants()" type="button" class="btn btn-custom">GottaEat</button>
         </div>
-        <div ng-if="isLoading" class="loading-container">
-            <i class="fa fa-cutlery loader" aria-hidden="true"></i>
-        </div>
-
-        <div ng-show="showModal" id="infoModal">
+        <div ng-if="showModal" id="infoModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" ng-click="showHideModal()"><i class="fa fa-times" aria-hidden="true"></i></button>
                     </div>
                     <div class="modal-body">
-                        <iframe
-                                id="map"
-                                frameborder="0" style="border:0"
-                                ng-src="{{getMapURL()}}">
-                        </iframe>
+                        <div class="map-wrapper">
+                            <div class="loading-container">
+                                <i class="fa fa-cutlery loader" aria-hidden="true"></i>
+                            </div>
+                            <iframe
+                                    id="map"
+                                    frameborder="0" style="border:0"
+                                    ng-src="{{getMapURL()}}">
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>

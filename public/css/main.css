@@ -5,12 +5,12 @@ body {
 
 .btn-container{
     display: flex;
-    margin-top: 45vh;
+    margin-top: 40vh;
 }
 
 .loading-container {
     display: flex;
-    margin-top: 40vh;
+    padding-top: 20%;
 }
 
 .loader {
@@ -55,7 +55,6 @@ body {
 
 #infoModal .modal-content {
     background-color: #E74C3C;
-    color: #f2f2f2;
 }
 
 #infoModal .modal-header {
@@ -63,7 +62,13 @@ body {
     padding: 5px;
 }
 
-#map {
+#map,
+.map-wrapper {
     height: 400px;
-    width: 100%;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    width: 95%;
 }
