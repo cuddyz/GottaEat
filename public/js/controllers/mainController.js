@@ -36,7 +36,7 @@ gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function
 
         var request = {
             location: location,
-            radius: 1000,
+            radius: 1609 * $scope.radius,
             types: ['restaurant'],
             openNow: true
         };
@@ -69,4 +69,10 @@ gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function
         }
         return "";
     }
+
+    $scope.$on("slideEnded", function(value) {
+        $scope.radius = value.targetScope.rzSliderModel;
+        $scope.restaurants = [];
+        $scope.restaurant = "";
+    });
 }]);

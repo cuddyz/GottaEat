@@ -23,11 +23,13 @@
             </div>
         </div>
         <div ng-if="hasLocation">
-            <div class="btn-container">
-                <button ng-click="getRestaurants()" type="button" class="btn btn-custom">GottaEat</button>
-            </div>
-            <div class="slider-container">
-                <rzslider rz-slider-model="radius" rz-slider-options="{floor: 1, ceil: 5, hideLimitLabels: true}"></rzslider>
+            <div ng-if="!showModal" class="input-container">
+                <div class="btn-container">
+                    <button ng-click="getRestaurants()" type="button" class="btn btn-custom">GottaEat</button>
+                </div>
+                <div class="slider-container">
+                    <rzslider ng-model="radius" rz-slider-model="radius" rz-slider-options="{floor: 1, ceil: 5, hideLimitLabels: true}"></rzslider>
+                </div>
             </div>
             <div ng-if="showModal" id="infoModal">
                 <div class="modal-dialog">
