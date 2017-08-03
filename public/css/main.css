@@ -77,3 +77,23 @@ body {
     top: 0;
     width: 95%;
 }
+
+.slider-container {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+}
+
+.rz-bar {
+    background-color: #FF6656 !important;
+}
+
+.rz-pointer {
+    background-color: #E74C3C !important;
+}
+
+.rz-pointer:after,
+.rz-active:after {
+    background-color: #F2F2F2 !important;
+}
