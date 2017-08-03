@@ -3,10 +3,12 @@
         <title>GottaEat</title>
         <script src="/modules/angular/angular.js"></script>
         <script src="/modules/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+        <script src="/modules/angularjs-slider/dist/rzslider.js"></script>
         <script src="https://use.fontawesome.com/65c60834b5.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB20RLa3am7lyDxjTsLNrDN3m7KO8CGLFc&libraries=places"></script>
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+        <link rel="stylesheet" type="text/css" href="/modules/angularjs-slider/dist/rzslider.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
 
@@ -23,6 +25,9 @@
         <div ng-if="hasLocation">
             <div class="btn-container">
                 <button ng-click="getRestaurants()" type="button" class="btn btn-custom">GottaEat</button>
+            </div>
+            <div class="slider-container">
+                <rzslider rz-slider-model="radius" rz-slider-options="{floor: 1, ceil: 5, hideLimitLabels: true}"></rzslider>
             </div>
             <div ng-if="showModal" id="infoModal">
                 <div class="modal-dialog">

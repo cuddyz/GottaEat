@@ -1,1 +1,1 @@
-var gottaEat = angular.module("gottaEat", ['geolocation']);
+var gottaEat = angular.module("gottaEat", ['geolocation', 'rzModule']);

@@ -1,6 +1,7 @@
 gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function($scope, $sce, geolocation) {
     $scope.showModal = false;
     $scope.restaurants = [];
+    $scope.radius = 3;
 
     geolocation.getLocation()
         .catch(function(e) {
