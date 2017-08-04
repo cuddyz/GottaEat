@@ -39,6 +39,8 @@ gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function
         var request = {
             location: location,
             radius: 1609 * $scope.radius,
+            minprice: $scope.minPrice - 1,
+            maxprice: $scope.maxPrice - 1,
             types: ['restaurant'],
             openNow: true
         };
@@ -57,6 +59,7 @@ gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function
             } else {
                 pickRestaurant();
                 $scope.$apply();
+                console.log($scope.restaurants);
             }
         } else {
             $scope.error = true;
@@ -72,8 +75,13 @@ gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function
         return "";
     }
 
-    $scope.$on("slideEnded", function(value) {
-        $scope.radius = value.targetScope.rzSliderModel;
+    $scope.$on("slideEnded", function(slider) {
+        if (slider.targetScope.rzSliderHigh) {
+            $scope.minPrice = slider.targetScope.rzSliderModel;
+            $scope.maxPrice = slider.targetScope.rzSliderHigh;
+        } else {
+            $scope.radius = slider.targetScope.rzSliderModel;
+        }
         $scope.restaurants = [];
         $scope.restaurant = "";
     });
