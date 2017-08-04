@@ -39,8 +39,8 @@ gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function
         var request = {
             location: location,
             radius: 1609 * $scope.radius,
-            minprice: $scope.minPrice - 1,
-            maxprice: $scope.maxPrice - 1,
+            minPriceLevel: $scope.minPrice - 1,
+            maxPriceLevel: $scope.maxPrice - 1,
             types: ['restaurant'],
             openNow: true
         };
@@ -59,10 +59,10 @@ gottaEat.controller('mainController', ['$scope', '$sce', 'geolocation', function
             } else {
                 pickRestaurant();
                 $scope.$apply();
-                console.log($scope.restaurants);
             }
         } else {
             $scope.error = true;
+            alert("No Restaurants Found!");
             $scope.showHideModal();
             $scope.$apply();
         }
