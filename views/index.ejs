@@ -29,7 +29,9 @@
                 </div>
                 <div class="slider-container">
                     <span>Radius(Miles)</span>
-                    <rzslider ng-model="radius" rz-slider-model="radius" rz-slider-options="{floor: 1, ceil: 5, hideLimitLabels: true}"></rzslider>
+                    <rzslider class="radius-slider" rz-slider-model="radius" rz-slider-options="{floor: 1, ceil: 5, hideLimitLabels: true}"></rzslider>
+                    <span>Price Range(1 - Cheapest, 5 - Most expensive)</span>
+                    <rzslider class="price-range-slider" rz-slider-model="minPrice" rz-slider-high="maxPrice" rz-slider-options="{floor: 1, ceil: 5, hideLimitLabels: true}"></rzslider>
                 </div>
             </div>
             <div ng-if="showModal" id="infoModal">
@@ -45,7 +47,7 @@
                                 </div>
                                 <iframe
                                         id="map"
-                                        frameborder="0" style="border:0"
+                                        frameborder="0"
                                         ng-src="{{getMapURL()}}">
                                 </iframe>
                             </div>

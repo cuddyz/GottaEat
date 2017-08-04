@@ -85,12 +85,25 @@ body {
     margin-top: 2%;
 }
 
-.rz-bar {
-    background-color: #FF6656 !important;
+.rzslider {
+    margin-bottom: 5%;
 }
 
-.rz-pointer {
-    background-color: #E74C3C !important;
+.radius-slider .rz-bar {
+    background-color: #FF6656;
+}
+
+.price-range-slider .rz-bar {
+    background-color: #FFCCBC;
+}
+
+.price-range-slider .rz-selection {
+    background-color: #FF6656;
+}
+
+.radius-slider .rz-pointer,
+.price-range-slider .rz-pointer {
+    background-color: #E74C3C;
 }
 
 .rz-pointer:after,
