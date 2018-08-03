@@ -1,4 +1,4 @@
-# gotta-eat
+# GottaEat
 
 > A Vue.js project
 

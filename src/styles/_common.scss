@@ -1,0 +1,65 @@
+body {
+    font-family: 'Roboto', sans-serif !important;
+    background-color: white;
+    color: color(black);
+}
+
+a {
+    text-decoration: none;
+    color: color(grey);
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+  border-radius: 5px;
+  background-color: color(blackLight);
+  border-color: darken(color(blackDark), 10%);
+  border-style: solid;
+  margin: 0.5rem;
+  padding: 0.75rem;
+  color: color(grey);
+  &:hover {
+    background-color: color(blackDark);
+    border-color: darken(color(blackDark), 20%);
+    cursor: pointer;
+  }
+  i {
+    font-size: 2rem;
+  }
+
+  &.dark {
+    background-color: color(blackDark);
+    border-color: darken(color(blackDark), 10%);
+
+    &:hover {
+      background-color: darken(color(blackDark), 10%);
+      border-color: darken(color(blackDark), 20%);
+    }
+  }
+}
+
+input,
+textarea {
+  font-family: 'Roboto', sans-serif !important;
+  border: thin solid color(grey);
+  background-color: white;
+  border-radius: 0.25rem;
+  line-height: 1;
+  padding: 0.4rem 0.5rem;
+  width: 100%;
+
+  &:focus {
+    border-color: color(greyDark);
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+

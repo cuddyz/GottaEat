@@ -36,6 +36,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      'styles': path.resolve(__dirname, '../src/styles/app.scss') // relative to the location of the webpack config file!
     }
   },
   module: {

@@ -1,0 +1,42 @@
+@for $i from 1 through 8 {
+  .flex-#{$i} {
+    flex: #{$i};
+  }
+}
+
+.flex {
+    display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.float-right {
+    float: right;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.text-center {
+    text-align: center;
+}
