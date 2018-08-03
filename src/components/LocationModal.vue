@@ -1,7 +1,7 @@
 <template>
   <section class="absolute flex">
     <div class="actions">
-      <i class="fas fa-times p-50"></i>
+      <i @click="$emit('close')" class="fas fa-times p-50"></i>
     </div>
     <div class="map-wrapper">
       <iframe
@@ -16,7 +16,10 @@
 <script>
 export default {
   name: 'LocationModal',
-  props: ['url']
+  props: ['url'],
+  methods: {
+
+  }
 }
 </script>
 

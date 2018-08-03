@@ -1,6 +1,6 @@
 <template>
   <main class="flex flex-center">
-    <section class="flex column flex-center actions" v-if="!showLocation">
+    <section class="flex column flex-center actions" v-if="!showModal">
       <button class="italic mb-3" @click="gottaEat()">GottaEat</button>
       <div class="mb-2 slider-container flex column flex-center">
         <p class="pl-1 pb-2">Radius (Miles)</p>
@@ -31,7 +31,7 @@
         </vue-slider>
       </div>
     </section>
-    <location-modal :url="locationUrl" v-if="showLocation"></location-modal>
+    <location-modal :url="locationUrl" v-if="showModal" v-on:close="showModal = false"></location-modal>
   </main>
 </template>
 
@@ -45,7 +45,7 @@ export default {
     return {
       radius: 3,
       price: [1, 5],
-      showLocation: false,
+      showModal: false,
       locationUrl: ''
     }
   },
@@ -57,7 +57,7 @@ export default {
     gottaEat: function() {
       // this.locationUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=place_id:" + $scope.restaurant.place_id'
       this.locationUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=5429%20Langsworth%20Dr.'
-      this.showLocation = true
+      this.showModal = true
     }
   }
 }
