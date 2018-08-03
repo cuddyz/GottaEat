@@ -1,6 +1,7 @@
 body {
     font-family: 'Roboto', sans-serif !important;
-    background-color: white;
+    background-image: url('../assets/background.png');
+    background-color: color(white);
     color: color(black);
 }
 
@@ -18,28 +19,26 @@ a:focus {
 
 button {
   border-radius: 5px;
-  background-color: color(blackLight);
-  border-color: darken(color(blackDark), 10%);
+  background-color: color(red);
+  border-color: color(red);
   border-style: solid;
   margin: 0.5rem;
   padding: 0.75rem;
-  color: color(grey);
+  color: color(white);
+  font-size: 2rem;
   &:hover {
-    background-color: color(blackDark);
-    border-color: darken(color(blackDark), 20%);
+    background-color: color(redDark);
+    border-color: color(redDark);
     cursor: pointer;
-  }
-  i {
-    font-size: 2rem;
   }
 
   &.dark {
-    background-color: color(blackDark);
-    border-color: darken(color(blackDark), 10%);
+    background-color: color(redDark);
+    border-color: color(redDark);
 
     &:hover {
-      background-color: darken(color(blackDark), 10%);
-      border-color: darken(color(blackDark), 20%);
+      background-color: darken(color(redDark), 10%);
+      border-color: darken(color(redDark), 10%);
     }
   }
 }

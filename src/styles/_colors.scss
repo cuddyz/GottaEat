@@ -7,7 +7,12 @@ $colors: (
     greyLight: 757575,
     grey: #616161,
     greyDark: #424242,
-    error: #f44336
+    whiteLight: #FAFAFA,
+    white: #F5F5F5,
+    whiteDark: #EEEEEE,
+    redLight: #FF6656,
+    red: #E74C3C,
+    redDark: #CE3323
 );
 @function color($color) {
     @if map-has-key($colors, $color) {
