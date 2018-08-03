@@ -1,7 +1,7 @@
 <template>
   <main class="flex flex-center">
-    <div class="flex column flex-center actions">
-      <button class="italic mb-3">GottaEat</button>
+    <section class="flex column flex-center actions" v-if="!showLocation">
+      <button class="italic mb-3" @click="gottaEat()">GottaEat</button>
       <div class="mb-2 slider-container flex column flex-center">
         <p class="pl-1 pb-2">Radius (Miles)</p>
         <vue-slider
@@ -30,23 +30,35 @@
           :processStyle="{ 'background-color': '#E74C3C' }" >
         </vue-slider>
       </div>
-    </div>
+    </section>
+    <location-modal :url="locationUrl" v-if="showLocation"></location-modal>
   </main>
 </template>
 
 <script>
 import VueSlider from 'vue-slider-component'
+import LocationModal from '@/components/LocationModal.vue'
 
 export default {
   name: 'Home',
   data () {
     return {
       radius: 3,
-      price: [1, 5]
+      price: [1, 5],
+      showLocation: false,
+      locationUrl: ''
     }
   },
   components: {
-    VueSlider
+    VueSlider,
+    LocationModal
+  },
+  methods: {
+    gottaEat: function() {
+      // this.locationUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=place_id:" + $scope.restaurant.place_id'
+      this.locationUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=5429%20Langsworth%20Dr.'
+      this.showLocation = true
+    }
   }
 }
 </script>
