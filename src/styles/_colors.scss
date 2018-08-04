@@ -1,0 +1,21 @@
+// colors
+// https://www.materialui.co/colors
+$colors: (
+    blackLight: #555555,
+    black: #3C3C3C,
+    blackDark: #232323,
+    greyLight: #757575,
+    grey: #616161,
+    greyDark: #424242,
+    whiteLight: #FAFAFA,
+    white: #F5F5F5,
+    whiteDark: #EEEEEE,
+    redLight: #FF6656,
+    red: #E74C3C,
+    redDark: #CE3323
+);
+@function color($color) {
+    @if map-has-key($colors, $color) {
+        @return map-get($colors, $color);
+    }
+}

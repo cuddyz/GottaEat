@@ -1,0 +1,28 @@
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+    display: block;
+}
+body,
+menu, input, textarea, label,
+h1, h2, h3, h4, h5, h6,
+dl, dt, dd, ul, li, p {
+    margin: 0;
+    padding: 0;
+    font-weight: 400; // just for the mocks
+}
+dl, dt, dd, ul, li {
+    list-style: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+pre { // firefox fix
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

@@ -1,0 +1,44 @@
+$spacing: (
+    25: 0.25rem,
+    50: 0.5rem,
+    75: 0.75rem,
+    1: 1rem,
+    2: 2rem,
+    3: 3rem,
+    4: 4rem,
+    5: 5rem
+);
+@each $value,$mar in $spacing { // margin utility classes
+    .m-#{$value} {
+        margin: $mar;
+    }
+    .mt-#{$value} {
+        margin-top: $mar;
+    }
+    .mr-#{$value} {
+        margin-right: $mar;
+    }
+    .mb-#{$value} {
+        margin-bottom: $mar;
+    }
+    .ml-#{$value} {
+        margin-left: $mar;
+    }
+}
+@each $value,$pad in $spacing { // padding utility classes
+    .p-#{$value} {
+        padding: $pad;
+    }
+    .pt-#{$value} {
+        padding-top: $pad;
+    }
+    .pr-#{$value} {
+        padding-right: $pad;
+    }
+    .pb-#{$value} {
+        padding-bottom: $pad;
+    }
+    .pl-#{$value} {
+        padding-left: $pad;
+    }
+}
