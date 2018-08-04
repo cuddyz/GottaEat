@@ -3,11 +3,17 @@
     <div class="actions">
       <i @click="$emit('close')" class="fas fa-times p-50"></i>
     </div>
+    <div v-if="loading" class="relative flex flex-center loading-container">
+      <loader></loader>
+    </div>
     <div v-if="!loading && !error" class="map-wrapper">
       <iframe
         id="map"
         frameborder="0"
-        :src="url" allowfullscreen>
+        :src="url"
+        allowtransparency="true"
+        style="background-color: #EEEEEE;"
+        allowfullscreen >
       </iframe>
     </div>
     <p v-if="error === 'ZERO'">Zero Results Found. Adjusting the sliders may help.</p>
@@ -17,17 +23,20 @@
 </template>
 
 <script>
+import Loader from '@/components/Loader.vue'
+
 export default {
   name: 'LocationModal',
   props: ['url', 'loading', 'error'],
-  methods: {
-
+  components: {
+    Loader
   }
 }
 </script>
 
 <style lang="scss" scoped>
   @import '../styles/colors.scss';
+  @import '../styles/breaks.scss';
 
   section {
     height: 60vh;
@@ -36,6 +45,15 @@ export default {
     border-radius: 5px;
     background-color: color(red);
     z-index: 10;
+
+    @media (max-width: breaks(laptop)) {
+        width: 80vw;
+    }
+
+    @media (max-width: breaks(phone)) {
+        width: 95vw;
+        height: 45vh;
+    }
 
     .actions {
       position: absolute;
@@ -62,9 +80,15 @@ export default {
       align-items: center;
 
       iframe {
+        background-color: colors(grey);
         height: 85%;
         width: 85%;
       }
+    }
+
+    .loading-container {
+      width: 100%;
+      height: 100%;
     }
   }
 </style>

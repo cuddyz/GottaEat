@@ -143,6 +143,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../styles/breaks';
   main {
     height: 100vh;
 
@@ -152,6 +153,17 @@ export default {
 
     .slider-container {
       width: 60%;
+
+      @media (max-width: breaks(phablet)) {
+        width: 80%;
+      }
+
+      .vue-slider-component {
+        @media (max-width: breaks(phablet)) {
+          padding-top: 2rem !important;
+          padding-bottom: 2rem !important;
+        }
+      }
 
       p {
         align-self: flex-start;
