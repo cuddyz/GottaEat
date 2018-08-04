@@ -3,20 +3,22 @@
     <div class="actions">
       <i @click="$emit('close')" class="fas fa-times p-50"></i>
     </div>
-    <div class="map-wrapper">
+    <div v-if="!loading && !error" class="map-wrapper">
       <iframe
         id="map"
         frameborder="0"
-        :src="url">
+        :src="url" allowfullscreen>
       </iframe>
     </div>
+    <p v-if="error === 'ZERO'">Zero Results Found. Adjusting the sliders may help.</p>
+    <p v-if="error === 'ERROR'">Something Bad Happened. Try again in a few minutes.</p>
   </section>
 </template>
 
 <script>
 export default {
   name: 'LocationModal',
-  props: ['url'],
+  props: ['url', 'loading', 'error'],
   methods: {
 
   }

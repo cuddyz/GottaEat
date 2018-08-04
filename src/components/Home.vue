@@ -32,7 +32,7 @@
         </vue-slider>
       </div>
     </section>
-    <location-modal :url="locationUrl" v-if="showModal" v-on:close="showModal = false"></location-modal>
+    <location-modal :error="modalError" :loading="modalLoading" :url="locationUrl" v-if="showModal" v-on:close="showModal = false"></location-modal>
   </main>
 </template>
 
@@ -49,10 +49,13 @@ export default {
       radius: 3,
       price: [1, 5],
       showModal: false,
+      modalLoading: false,
+      modalError: false,
       coords: {},
       locationUrl: '',
       isLoading: false,
-      restaurants: []
+      restaurants: [],
+      randRestaurant: {}
     }
   },
   components: {
@@ -62,15 +65,14 @@ export default {
   },
   methods: {
     gottaEat() {
+      this.showModal = true
+      this.modalLoading = true
+
       if (this.restaurants.length > 0) {
-        console.log(this.restaurants)
+        this.pickRestaurant()
       } else {
         this.getRestaurants()
       }
-
-      // this.locationUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=place_id:" + $scope.restaurant.place_id'
-      this.locationUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=5429%20Langsworth%20Dr.'
-      this.showModal = true
     },
     getRestaurants() {
       var self = this
@@ -98,10 +100,21 @@ export default {
           if (page.hasNextPage) {
             page.nextPage()
           } else {
-            console.log(self.restaurants)
+            self.pickRestaurant()
           }
+        // eslint-disable-next-line
+        } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+          self.modalError = 'ZERO'
+        } else {
+          self.modalError = 'ERROR'
         }
       })
+    },
+    pickRestaurant() {
+      const random = Math.floor((Math.random() * this.restaurants.length))
+      this.randRestaurant = this.restaurants[random]
+      this.modalLoading = false
+      this.locationUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=place_id:${this.randRestaurant.place_id}`
     }
   },
   async created() {
