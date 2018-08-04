@@ -56,6 +56,8 @@ export default {
     }
 
     .actions {
+      margin-left: auto;
+
       i {
         color: color(black);
         opacity: 0.2;
