@@ -76,11 +76,12 @@ export default {
       if (self.querySame) {
         self.pickRestaurant()
       } else {
-        geo.getLocation({timeout: 5000})
+        geo.getLocation({timeout: 15000})
           .then(coordinates => {
             self.coords = coordinates
           })
-          .catch(function() {
+          .catch(function(error) {
+            console.log(error)
             self.coords = ''
             self.modalError = 'LOC'
             self.modalLoading = false
