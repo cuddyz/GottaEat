@@ -96,6 +96,8 @@ export default {
     getRestaurants() {
       var self = this
 
+      self.modalError = ''
+
       // eslint-disable-next-line
       const googleCoords = new google.maps.LatLng(self.coords.lat, self.coords.lng)
 
