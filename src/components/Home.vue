@@ -161,8 +161,8 @@ export default {
 
       .vue-slider-component {
         @media (max-width: breaks(phablet)) {
-          padding-top: 2rem !important;
-          padding-bottom: 2rem !important;
+          padding-top: 1.5rem !important;
+          padding-bottom: 1.5rem !important;
         }
       }
 
