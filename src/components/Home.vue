@@ -49,9 +49,10 @@ export default {
       radius: 3,
       price: [1, 5],
       showModal: false,
-      location: {},
+      coords: {},
       locationUrl: '',
-      isLoading: false
+      isLoading: false,
+      restaurants: []
     }
   },
   components: {
@@ -60,24 +61,62 @@ export default {
     PageLoader
   },
   methods: {
-    gottaEat: function() {
+    gottaEat() {
+      if (this.restaurants.length > 0) {
+        console.log(this.restaurants)
+      } else {
+        this.getRestaurants()
+      }
+
       // this.locationUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=place_id:" + $scope.restaurant.place_id'
       this.locationUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=5429%20Langsworth%20Dr.'
       this.showModal = true
+    },
+    getRestaurants() {
+      var self = this
+
+      // eslint-disable-next-line
+      const googleCoords = new google.maps.LatLng(this.coords.lat, this.coords.lng)
+
+      const body = {
+        location: googleCoords,
+        radius: 1609 * this.radius,
+        minPriceLevel: this.price[0] - 1,
+        maxPriceLevel: this.price[1] - 1,
+        types: ['restaurant'],
+        openNow: true
+      }
+
+      // It needs an element to hook into
+      // This also behaves like a promise
+      // eslint-disable-next-line
+      var service = new google.maps.places.PlacesService(document.createElement('div'))
+      service.nearbySearch(body, function(results, status, page) {
+        // eslint-disable-next-line
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          self.restaurants = self.restaurants.concat(results)
+          if (page.hasNextPage) {
+            page.nextPage()
+          } else {
+            console.log(self.restaurants)
+          }
+        }
+      })
     }
   },
   async created() {
     var self = this
 
     self.isLoading = true
-    geo.getLocation()
+    geo.getLocation({timeout: 5000})
       .then(coordinates => {
-        self.location = coordinates
+        self.coords = coordinates
       })
       .catch(function() {
-        self.location = ''
+        self.coords = ''
       })
       .finally(function() {
+        console.log(self.coords)
         self.isLoading = false
       })
   }
