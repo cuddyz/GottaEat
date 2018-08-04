@@ -130,8 +130,10 @@ export default {
         // eslint-disable-next-line
         } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
           self.modalError = 'ZERO'
+          this.modalLoading = false
         } else {
           self.modalError = 'ERROR'
+          this.modalLoading = false
         }
       })
     },
