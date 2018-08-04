@@ -11,6 +11,7 @@
       </iframe>
     </div>
     <p v-if="error === 'ZERO'">Zero Results Found. Adjusting the sliders may help.</p>
+    <p v-if="error === 'LOC'">This app needs your location to find restaurants near you.  Please update your settings.</p>
     <p v-if="error === 'ERROR'">Something Bad Happened. Try again in a few minutes.</p>
   </section>
 </template>

@@ -1,7 +1,6 @@
 <template>
   <main class="flex flex-center">
-    <page-loader v-if="isLoading"></page-loader>
-    <section v-if="!showModal && !isLoading" class="flex column flex-center actions">
+    <section v-if="!showModal" class="flex column flex-center actions">
       <button class="italic mb-3" @click="gottaEat()">GottaEat</button>
       <div class="mb-2 slider-container flex column flex-center">
         <p class="pl-1 pb-2">Radius (Miles)</p>
@@ -40,54 +39,77 @@
 import VueSlider from 'vue-slider-component'
 import geo from 'vue-browser-geolocation'
 import LocationModal from '@/components/LocationModal.vue'
-import PageLoader from '@/components/PageLoader.vue'
 
 export default {
   name: 'Home',
   data () {
     return {
       radius: 3,
+      cachedRadius: 0,
       price: [1, 5],
+      cachedPrice: [0, 0],
       showModal: false,
       modalLoading: false,
       modalError: false,
       coords: {},
       locationUrl: '',
-      isLoading: false,
       restaurants: [],
       randRestaurant: {}
     }
   },
   components: {
     VueSlider,
-    LocationModal,
-    PageLoader
+    LocationModal
+  },
+  computed: {
+    querySame: function() {
+      return this.cachedRadius === this.radius && this.cachedPrice[0] === this.price[0] && this.cachedPrice[1] === this.price[1]
+    }
   },
   methods: {
     gottaEat() {
-      this.showModal = true
-      this.modalLoading = true
+      var self = this
 
-      if (this.restaurants.length > 0) {
-        this.pickRestaurant()
+      self.showModal = true
+      self.modalLoading = true
+
+      if (self.querySame) {
+        self.pickRestaurant()
       } else {
-        this.getRestaurants()
+        geo.getLocation({timeout: 5000})
+          .then(coordinates => {
+            self.coords = coordinates
+          })
+          .catch(function() {
+            self.coords = ''
+            self.modalError = 'LOC'
+            self.modalLoading = false
+          })
+          .finally(function() {
+            if (self.coords) {
+              self.getRestaurants()
+            }
+          })
       }
     },
     getRestaurants() {
       var self = this
 
       // eslint-disable-next-line
-      const googleCoords = new google.maps.LatLng(this.coords.lat, this.coords.lng)
+      const googleCoords = new google.maps.LatLng(self.coords.lat, self.coords.lng)
 
       const body = {
         location: googleCoords,
-        radius: 1609 * this.radius,
-        minPriceLevel: this.price[0] - 1,
-        maxPriceLevel: this.price[1] - 1,
+        radius: 1609 * self.radius,
+        minPriceLevel: self.price[0] - 1,
+        maxPriceLevel: self.price[1] - 1,
         types: ['restaurant'],
         openNow: true
       }
+
+      // Save on extra API calls, watchers were being a pain
+      self.cachedRadius = self.radius
+      self.cachedPrice = self.price
 
       // It needs an element to hook into
       // This also behaves like a promise
@@ -116,22 +138,6 @@ export default {
       this.modalLoading = false
       this.locationUrl = `https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=place_id:${this.randRestaurant.place_id}`
     }
-  },
-  async created() {
-    var self = this
-
-    self.isLoading = true
-    geo.getLocation({timeout: 5000})
-      .then(coordinates => {
-        self.coords = coordinates
-      })
-      .catch(function() {
-        self.coords = ''
-      })
-      .finally(function() {
-        console.log(self.coords)
-        self.isLoading = false
-      })
   }
 }
 </script>
