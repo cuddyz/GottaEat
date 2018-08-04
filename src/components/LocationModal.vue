@@ -1,7 +1,7 @@
 <template>
-  <section class="absolute flex">
+  <section class="absolute flex column">
     <div class="actions">
-      <i @click="$emit('close')" class="fas fa-times p-50"></i>
+      <i @click="$emit('close')" class="fas fa-times"></i>
     </div>
     <div v-if="loading" class="relative flex flex-center loading-container">
       <loader></loader>
@@ -52,17 +52,15 @@ export default {
 
     @media (max-width: breaks(phone)) {
         width: 95vw;
-        height: 45vh;
+        height: 50vh;
     }
 
     .actions {
-      position: absolute;
-      right: .5rem;
-
       i {
         color: color(black);
         opacity: 0.2;
         font-size: 1.5rem;
+        padding: 0.5rem 0.5rem 0rem 0.5rem;
 
         &:hover {
           color: color(blackDark);
@@ -77,7 +75,6 @@ export default {
       width: 100%;
       display: flex;
       justify-content: center;
-      align-items: center;
 
       iframe {
         background-color: colors(grey);
