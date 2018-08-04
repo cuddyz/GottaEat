@@ -1,6 +1,7 @@
 <template>
   <main class="flex flex-center">
-    <section class="flex column flex-center actions" v-if="!showModal">
+    <page-loader v-if="isLoading"></page-loader>
+    <section v-if="!showModal && !isLoading" class="flex column flex-center actions">
       <button class="italic mb-3" @click="gottaEat()">GottaEat</button>
       <div class="mb-2 slider-container flex column flex-center">
         <p class="pl-1 pb-2">Radius (Miles)</p>
@@ -37,7 +38,9 @@
 
 <script>
 import VueSlider from 'vue-slider-component'
+import geo from 'vue-browser-geolocation'
 import LocationModal from '@/components/LocationModal.vue'
+import PageLoader from '@/components/PageLoader.vue'
 
 export default {
   name: 'Home',
@@ -46,12 +49,15 @@ export default {
       radius: 3,
       price: [1, 5],
       showModal: false,
-      locationUrl: ''
+      location: {},
+      locationUrl: '',
+      isLoading: false
     }
   },
   components: {
     VueSlider,
-    LocationModal
+    LocationModal,
+    PageLoader
   },
   methods: {
     gottaEat: function() {
@@ -59,6 +65,21 @@ export default {
       this.locationUrl = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCsvltI-QXGXkrFAPf_BlazIrYLKH4lcmE&q=5429%20Langsworth%20Dr.'
       this.showModal = true
     }
+  },
+  async created() {
+    var self = this
+
+    self.isLoading = true
+    geo.getLocation()
+      .then(coordinates => {
+        self.location = coordinates
+      })
+      .catch(function() {
+        self.location = ''
+      })
+      .finally(function() {
+        self.isLoading = false
+      })
   }
 }
 </script>
